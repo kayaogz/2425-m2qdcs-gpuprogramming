@@ -30,5 +30,9 @@ You can bring four A4 sheets to the mini-exam (both sides); no other material is
 
 Text editor: If you do not have a "preferred" text editor for development already, I recommend Visual Studio Code: https://code.visualstudio.com . You can follow the official tutorial for the basics: https://www.youtube.com/watch?v=B-s71n0dHUk&list=PLj6YeMhvp2S5UgiQnBfvD7XgOMKs3O_G6
 
+If your nvcc command does not work on the reserved machines, put the following line to your ~/.bashrc file:
+
+PATH=/usr/local/cuda/bin:$PATH
+
 ## Contact
   oguz.kaya [at] universite-paris-saclay.fr
