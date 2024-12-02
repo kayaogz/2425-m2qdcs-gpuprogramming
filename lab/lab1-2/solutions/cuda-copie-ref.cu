@@ -69,9 +69,11 @@ int main(int argc, char **argv) {
   for (int i = 0; i < N; i++) { B[i] = 0.0f; }
   cudaMemcpy(Bd, B, N * sizeof(float), cudaMemcpyHostToDevice);
 
+  int blockSize = 256;
+
   // Copier Ad dans Bd avec le kernel cudaCopieParBlocsThreads
   // A FAIRE ...
-  cudaCopieParBlocsThreads<<<(N-1)/1024 + 1, 1024>>>(Bd, Ad, N);
+  cudaCopieParBlocsThreads<<<(N + blockSize - 1)/blockSize, 1024>>>(Bd, Ad, N);
 
   // Attendre que le kernel cudaCopieParBlocsThreads termine
   cudaerr = cudaDeviceSynchronize();
