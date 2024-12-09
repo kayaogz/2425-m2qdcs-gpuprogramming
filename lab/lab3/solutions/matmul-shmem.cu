@@ -88,8 +88,8 @@ __global__ void multiplyMatrixGPUByBlocksThreads2DNonMultiple(int n)
 __global__ void multiplyMatrixGPUByBlocksThreads2DNonMultipleSharedMemory(int n)
 {
   // A FAIRE ...
-  int row = threadIdx.x + blockIdx.x * BSXY;
-  int col = threadIdx.y + blockIdx.y * BSXY;
+  int row = threadIdx.y + blockIdx.x * BSXY;
+  int col = threadIdx.x + blockIdx.y * BSXY;
   __shared__ float shA[BSXY][BSXY];
   __shared__ float shB[BSXY][BSXY];
   float c = 0.0;
@@ -168,12 +168,12 @@ int main(int argc, char **argv)
   // Appeler chaque kernel GPU de maniere appropriee pour multiplier les matrices A et B
   // A FAIRE ...
   dim3 dimGrid;
-  dimGrid.x = (N - 1) / 32 + 1;
-  dimGrid.y = (N - 1) / 32 + 1;
+  dimGrid.x = (N - 1) / BSXY + 1;
+  dimGrid.y = (N - 1) / BSXY + 1;
   dimGrid.z = 1;
   dim3 dimBlock;
-  dimBlock.x = 32;
-  dimBlock.y = 32;
+  dimBlock.x = BSXY;
+  dimBlock.y = BSXY;
   dimBlock.z = 1;
   // multiplyMatrixGPUByBlocks<<<dimGrid, dimBlock>>>(N);
   // multiplyMatrixGPUByBlocksThreads1D<<<dimGrid, dimBlock>>>(N);
