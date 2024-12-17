@@ -23,7 +23,7 @@ __global__ void findMinimum(float *dA, float *dAmin, int N)
   if (idx < N)
     buff[threadIdx.x] = dA[idx]; 
   else
-    buff[threadIdx.x] = 0.0;
+    buff[threadIdx.x] = FLT_MAX;
   if (BLOCKSIZE > 512) {
   __syncthreads(); 
   if (threadIdx.x < 512) 
